@@ -5,7 +5,7 @@ const sequelize = require('../config/mysql')
 const RoleModel = sequelize.define('role', {
   id: { type: INTEGER, primaryKey: true, autoIncrement: true },
   role_name: { type: STRING, allowNull: false },
-  c_name: { type: STRING }
+  role_cname: { type: STRING }
 }, { freezeTableName: true })
 
 // 同步
