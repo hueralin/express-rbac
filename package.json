@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "eslint": "eslint --fix --ext .js ."
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,11 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "eslint": "^8.37.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^2.0.22"
   }
 }

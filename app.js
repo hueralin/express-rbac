@@ -11,7 +11,7 @@ app.use(express.json())
 // 解析 body 中的 formData 数据
 app.use(express.urlencoded())
 
-// 设置模板引擎
+// 设置模板引擎（默认就是根目录下的 views 目录）
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
@@ -19,14 +19,14 @@ app.set('views', './views')
 app.use('/', router)
 // 404 handler
 app.use((req, res, next) => {
-    res.status(404).send('404 Not Found!')
+  res.status(404).send('404 Not Found!')
 })
 // err handler
 app.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 })
 
 app.listen(process.env.APP_PORT, () => {
-    console.log('server running on port ', process.env.APP_PORT)
+  console.log('server running on port ', process.env.APP_PORT)
 })
