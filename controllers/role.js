@@ -14,8 +14,8 @@ async function getRoleList (req, res) {
 
 // 创建角色
 async function createRole (req, res) {
-  const { roleName, roleCname } = req.body
   try {
+    const { roleName, roleCname } = req.body
     const role = await RoleModel.findOne({ where: { role_name: roleName } })
     if (role) {
       res.json({ code: -1, data: null, message: '角色已存在' })
@@ -32,8 +32,8 @@ async function createRole (req, res) {
 
 // 更新角色
 async function updateRole (req, res) {
-  const { id, roleCname } = req.body
   try {
+    const { id, roleCname } = req.body
     const rows = await RoleModel.update({ role_cname: roleCname }, { where: { id } })
     if (rows > 0) {
       res.json({ code: 0, data: null, message: '更新角色成功' })
@@ -49,8 +49,8 @@ async function updateRole (req, res) {
 
 // 删除角色
 async function deleteRole (req, res) {
-  const { id } = req.query
   try {
+    const { id } = req.query
     const rows = await RoleModel.destroy({ where: { id } })
     if (rows > 0) {
       res.json({ code: 0, data: null, message: '删除角色成功' })

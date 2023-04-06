@@ -3,8 +3,8 @@ const UserModel = require('../models/user')
 
 // 注册
 async function register (req, res) {
-  const { username, nickname, password } = req.body
   try {
+    const { username, nickname, password } = req.body
     const user = await UserModel.findOne({ where: { username } })
     if (user) {
       res.json({ code: -1, data: null, message: '用户名已存在' })
@@ -22,8 +22,8 @@ async function register (req, res) {
 
 // 登录
 async function login (req, res) {
-  const { username, password } = req.body
   try {
+    const { username, password } = req.body
     const user = await UserModel.findOne({ where: { username } })
     if (user && user.password === password) {
       const token = await jwt.sign({ id: user.id, username }, process.env.TOKEN_SECRET)
@@ -52,8 +52,8 @@ async function getUserList (req, res) {
 
 // 创建用户
 async function createUser (req, res) {
-  const { username, nickname, password } = req.body
   try {
+    const { username, nickname, password } = req.body
     const user = await UserModel.findOne({ where: { username } })
     if (user) {
       res.json({ code: -1, data: null, message: '用户名已存在' })
@@ -70,8 +70,8 @@ async function createUser (req, res) {
 
 // 更新用户
 async function updateUser (req, res) {
-  const { id, nickname } = req.body
   try {
+    const { id, nickname } = req.body
     const rows = await UserModel.update({ nickname }, { where: { id } })
     if (rows > 0) {
       res.json({ code: 0, data: null, message: '更新用户成功' })
@@ -87,8 +87,8 @@ async function updateUser (req, res) {
 
 // 删除用户
 async function deleteUser (req, res) {
-  const { id } = req.query
   try {
+    const { id } = req.query
     const rows = await UserModel.destroy({ where: { id } })
     if (rows > 0) {
       res.json({ code: 0, data: null, message: '删除成功' })

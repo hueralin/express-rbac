@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const userCtr = require('./controllers/user')
 const roleCtr = require('./controllers/role')
+const resourceCtl = require('./controllers/resource')
 const authentication = require('./middlewares/authentication')
 
 // 注册 & 登录
@@ -19,5 +20,11 @@ router.get('/api/role', authentication, roleCtr.getRoleList)
 router.post('/api/role', authentication, roleCtr.createRole)
 router.put('/api/role', authentication, roleCtr.updateRole)
 router.delete('/api/role', authentication, roleCtr.deleteRole)
+
+// 资源相关
+router.get('/api/resource', authentication, resourceCtl.getResourceList)
+router.post('/api/resource', authentication, resourceCtl.createResource)
+router.put('/api/resource', authentication, resourceCtl.updateResource)
+router.delete('/api/resource', authentication, resourceCtl.deleteResource)
 
 module.exports = router
