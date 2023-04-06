@@ -5,6 +5,18 @@ const roleCtr = require('./controllers/role')
 const resourceCtl = require('./controllers/resource')
 const authentication = require('./middlewares/authentication')
 
+// ---------------- 页面路由 ----------------
+
+router.get('/', authentication, (req, res) => {
+  res.render('index')
+})
+
+router.get('/login', (req, res) => {
+  res.render('login')
+})
+
+// ---------------- api路由 ----------------
+
 // 注册 & 登录
 router.post('/api/register', userCtr.register)
 router.post('/api/login', userCtr.login)

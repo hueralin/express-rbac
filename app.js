@@ -1,10 +1,18 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const cookieSession = require('cookie-session')
 // 首先加载环境变量
 dotenv.config()
 const router = require('./router')
 
 const app = express()
+
+// 配置 cookie session
+app.use(cookieSession({
+  name: 'sid',
+  secret: process.env.SESSION_SECRET,
+  maxAge: 60 * 1000 // 1 minute
+}))
 
 // 解析 body 中的 json 数据
 app.use(express.json())
@@ -12,8 +20,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // 设置模板引擎（默认就是根目录下的 views 目录）
-// app.set('view engine', 'ejs')
-// app.set('views', './views')
+app.set('view engine', 'ejs')
+app.set('views', './views')
 
 // 设置路由
 app.use('/', router)

@@ -1,13 +1,9 @@
-const jwt = require('jsonwebtoken')
-
 async function authentication (req, res, next) {
-  const token = req.headers.authorization
-  try {
-    const userInfo = await jwt.verify(token, process.env.TOKEN_SECRET)
-    req.userInfo = userInfo
+  console.log('session: ', req.session)
+  if (req.session.userInfo) {
     next()
-  } catch (err) {
-    res.json({ code: -1, data: null, message: '用户名或密码错误' })
+  } else {
+    res.redirect(401, '/login')
   }
 }
 

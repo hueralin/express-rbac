@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+    <form id="loginForm">
+        <label>
+            <input type="text" name="username" placeholder="username">
+        </label>
+        <br>
+        <label>
+            <input type="password" name="password" placeholder="password">
+        </label>
+        <br>
+        <button type="button" id="submit">Submit</button>
+    </form>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $('#submit').click(function() {
+          const formData = $('#loginForm').serialize()
+          $.ajax({
+            type: 'post',
+            url: '/api/login',
+            data: formData,
+            success: function(res) {
+              if (res.code === 0) {
+                location.href = '/'
+              }
+            }
+          })
+        })
+    </script>
+</body>
+</html>

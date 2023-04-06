@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const UserModel = require('../models/user')
 
 // 注册
@@ -11,8 +10,8 @@ async function register (req, res) {
       return
     }
     const newUser = await UserModel.create({ username, nickname, password })
-    const token = await jwt.sign({ id: newUser.id, username }, process.env.TOKEN_SECRET)
-    res.json({ code: 0, data: token, message: '' })
+    req.session.userInfo = { ...newUser }
+    res.json({ code: 0, data: { ...newUser }, message: '' })
   } catch (err) {
     const message = `register user failed: ${err.message}`
     console.error(message)
@@ -26,8 +25,8 @@ async function login (req, res) {
     const { username, password } = req.body
     const user = await UserModel.findOne({ where: { username } })
     if (user && user.password === password) {
-      const token = await jwt.sign({ id: user.id, username }, process.env.TOKEN_SECRET)
-      res.json({ code: 0, data: token, message: '登录成功' })
+      req.session.userInfo = { ...user }
+      res.json({ code: 0, data: { ...user }, message: '登录成功' })
     } else {
       res.json({ code: -1, data: null, message: '该用户不存在' })
     }
